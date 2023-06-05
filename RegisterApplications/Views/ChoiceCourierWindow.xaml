@@ -1,0 +1,41 @@
+﻿<Window x:Class="RegisterApplications.Views.ChoiceCourierWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Выбор курьера" 
+        Height="170" Width="350" 
+        ResizeMode="NoResize"
+        Name="ChoiceNewCourierWindow"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Text="Выберите курьера для отправки груза"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   TextWrapping="Wrap"/>
+        <ComboBox Grid.Row="1" Height="30" Width="300"
+                  FontSize="14"
+                  ItemsSource="{Binding Couriers}" 
+                  DisplayMemberPath="Name"
+                  SelectedItem="{Binding Courier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <Button Grid.Row="3"
+                Width="40"
+                Content="Ок"
+                Foreground="Black" 
+                FontSize="14"
+                Command="{Binding CloseWindowCommand}"
+                CommandParameter="{Binding ElementName=ChoiceNewCourierWindow}"/>
+    </Grid>
+</Window>

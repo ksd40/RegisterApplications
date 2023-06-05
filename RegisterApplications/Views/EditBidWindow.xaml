@@ -1,0 +1,64 @@
+﻿<Window x:Class="RegisterApplications.Views.EditBidWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Редактирование заявки" 
+        Height="290" Width="500" 
+        ResizeMode="CanMinimize" 
+        Name="EditNewBidWindow"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1"
+                    Orientation="Vertical">
+            <TextBlock Text="Отредактируйте данные заявки" 
+                       TextAlignment="Center" 
+                       FontWeight="Bold"
+                       FontSize="18"/>
+
+            <TextBlock Text="Имя заявки"
+                       FontSize="16"/>
+            <TextBox Text="{Binding Bid.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Height="25"
+                     FontSize="14"/>
+
+            <TextBlock Text="Отправитель"
+                       FontSize="16"/>
+            <TextBox Text="{Binding Bid.Sender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Height="25"
+                     FontSize="14"/>
+
+            <TextBlock Text="Получатель"
+                       FontSize="16"/>
+            <TextBox Text="{Binding Bid.Recipient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Height="25"
+                     FontSize="14"/>
+
+            <TextBlock Text="Груз"
+                       FontSize="16"/>
+            <TextBox Text="{Binding Bid.Cargo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Height="25"
+                     FontSize="14"/>
+        </StackPanel>
+
+        <Button Grid.Column="1" Grid.Row="2"
+                Width="75"
+                Content="Сохранить"
+                Foreground="Black" 
+                FontSize="14"
+                Command="{Binding CloseWindowCommand}"
+                CommandParameter="{Binding ElementName=EditNewBidWindow}"/>
+    </Grid>
+</Window>

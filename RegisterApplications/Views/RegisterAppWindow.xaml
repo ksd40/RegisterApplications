@@ -1,0 +1,72 @@
+﻿<Window x:Class="RegisterApplications.Views.RegisterAppWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:RegisterApplications.ViewModels"
+        mc:Ignorable="d"
+        Title="Реестр заявок" Height="500" Width="900"
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:RegisterAppViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="5"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="1" 
+                   Text="Поиск:" 
+                   TextAlignment="Center" 
+                   Height="20"/>
+        <TextBox Grid.Column="2" Grid.ColumnSpan="3" 
+                 Height="20" 
+                 Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}"/>
+        <ListView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="8"
+                  x:Name="RegisterAppView" 
+                  ItemsSource="{Binding BidView, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectedItem="{Binding SelectedBid, UpdateSourceTrigger=PropertyChanged}">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Редактировать" Command="{Binding EditBidCommand}"/>
+                    <MenuItem Header="Передать на выполнение" Command="{Binding SubmitBidCommand}"/>
+                    <MenuItem Header="Выполнить" Command="{Binding CompleteBidCommand}"/>
+                    <MenuItem Header="Отменить" Command="{Binding CancelBidCommand}"/>
+                    <MenuItem Header="Удалить" Command="{Binding DeleteBidCommand}"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Имя заявки"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Sender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Отправитель"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Recipient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Получатель"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Cargo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Груз"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Courier.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Курьер"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Статус"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Комментарий"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Grid.Column="7" Grid.Row="3"
+                Content="Добавить заявку"
+                Foreground="Black" 
+                FontSize="12"
+                Command="{Binding AddBidCommand}"/>
+    </Grid>
+</Window>
